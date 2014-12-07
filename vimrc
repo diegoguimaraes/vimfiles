@@ -1,3 +1,7 @@
+" utf8
+set encoding=utf-8
+set fileencoding=utf8
+
 set nocompatible              " be iMproved, required
 filetype off                  " required by vundle
 " set the runtime path to include Vundle and initialize
@@ -49,8 +53,12 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 " moving lines
-imap <S-down> <Esc> ddpi
-imap <S-up> <Esc> ddkPi
+nnoremap <A-j> :m .+1<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " smart home
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
@@ -69,12 +77,12 @@ set incsearch
 map <Tab> :tabnext<CR>
 map <S-Tab> :tabpreviou<CR>
 
-" hack to get Solirized working
+" hack to get Solarized working
 syntax on
 set t_Co=16
 let g:solarized_termcolors=256
 syntax enable
-set background=dark
+set background=light
 colorscheme solarized
 
 " Show path/file name on the bottom of the window
@@ -85,12 +93,8 @@ set foldmethod=manual
 
 "autocmd VimEnter,BufNewFile,BufReadPost *.html set ft=htmldjango
 
-" utf8
-set encoding=utf-8
-set fileencoding=utf8
-
 " ctrl-p plugin
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_working_path_mode = 'ra'
 
 " disable arrow navigation keys
 map <Left> <Nop>
@@ -99,14 +103,16 @@ map <Up> <Nop>
 map <Down> <Nop>
 nnoremap <expr> <Up> ((bufname("%") is# "[Command Line]")?("\<Up>"):(""))
 
-" Add colorscheme for Kivy files
-"au BufRead,BufNewFile *.kv set filetype=kivy
-"au! Syntax kivy source $HOME/.vim/colors/kivy.vim
+" Instant markdown (enable to work with markdown)
+" set shell=bash\ -i
 
-" Instant markdown
-set shell=bash\ -i
-
-"powerline settings
+" Airline settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline_theme='badwolf'
+let g:airline_powerline_fonts=1
+
+" workaround to read alt key press on gnome-terminal
+set ttimeout ttimeoutlen=50
