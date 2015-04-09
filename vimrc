@@ -1,7 +1,3 @@
-" utf8
-set encoding=utf-8
-set fileencoding=utf8
-
 set nocompatible              " be iMproved, required
 filetype off                  " required by vundle
 " set the runtime path to include Vundle and initialize
@@ -17,12 +13,11 @@ Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
 Plugin 'bling/vim-airline'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'pangloss/vim-javascript'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'nvie/vim-flake8'
-Plugin 'suan/vim-instant-markdown'
+Plugin 'tarmack/vim-python-ftplugin'
 "
-call vundle#end()         " required by vundle
+call vundle#end() " required by vundle
 filetype plugin indent on " required by vundle
 
 set backupdir=/tmp/
@@ -38,6 +33,7 @@ set shiftwidth=4
 " other than the (hard)tabstop
 set softtabstop=4
 
+
 "make "tab" insert indents insted of tabs at the beginning of a line
 set smarttab
 
@@ -46,7 +42,11 @@ set expandtab
 
 " auto indent
 set autoindent
-"set cindent
+
+" utf8
+set encoding=utf-8
+set fileencoding=utf8
+
 
 " moving tabs
 nnoremap <C-Left> :tabprevious<CR>
@@ -82,14 +82,15 @@ syntax on
 set t_Co=16
 let g:solarized_termcolors=256
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 
 " Show path/file name on the bottom of the window
 set ls=2
 
 " Enable folding
-set foldmethod=manual
+"set foldmethod=syntax
+set foldlevel=20
 
 "autocmd VimEnter,BufNewFile,BufReadPost *.html set ft=htmldjango
 
@@ -116,3 +117,9 @@ let g:airline_powerline_fonts=1
 
 " workaround to read alt key press on gnome-terminal
 set ttimeout ttimeoutlen=50
+
+" Python syntax
+let python_highlight_all = 1
+
+" ruby indent
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
