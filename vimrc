@@ -9,13 +9,15 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-surround'
 Plugin 'mattn/emmet-vim'
 Plugin 'bling/vim-airline'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'endel/vim-github-colorscheme'
 Plugin 'nvie/vim-flake8'
-Plugin 'tarmack/vim-python-ftplugin'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'benmills/vimux'
 "
 call vundle#end() " required by vundle
 filetype plugin indent on " required by vundle
@@ -78,12 +80,21 @@ map <Tab> :tabnext<CR>
 map <S-Tab> :tabpreviou<CR>
 
 " hack to get Solarized working
-syntax on
-set t_Co=16
-let g:solarized_termcolors=256
+"syntax on
+"set t_Co=256
+"let g:solarized_termcolors=256
+"syntax enable
+"set background=dark
+"colorscheme solarized
+
+"Gruvbox colorscheme
+set t_Co=256
+let g:gruvbox_termcolors=256
 syntax enable
+colorscheme gruvbox
 set background=dark
-colorscheme solarized
+
+call togglebg#map("<F5>")
 
 " Show path/file name on the bottom of the window
 set ls=2
@@ -123,3 +134,28 @@ let python_highlight_all = 1
 
 " ruby indent
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+
+" Mac
+set clipboard=unnamed
+" Mac backspace
+set backspace=indent,eol,start
+
+" set a map leader for more key combos
+let mapleader = ','
+
+" close NERDTree after a file is opened
+let g:NERDTreeQuitOnOpen=1
+" show hidden files in NERDTree
+let NERDTreeShowHidden=1
+" Toggle NERDTree
+nmap <silent> <leader>k :NERDTreeToggle<cr>
+" expand to the path of the file in the current buffer
+nmap <silent> <leader>y :NERDTreeFind<cr>
+
+" Vimux mappings
+autocmd Filetype python nmap <leader>z :call VimuxRunCommand("make test")<cr>
+autocmd Filetype python nmap <leader>p :call VimuxRunCommand("make pep8")<cr>
+autocmd Filetype python nmap <leader>r :call VimuxRunCommand("make run")<cr>
+
+" vim crypto algorithm
+set cm=blowfish
