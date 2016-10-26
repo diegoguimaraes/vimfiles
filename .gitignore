@@ -1,3 +1,4 @@
 bundle/
 !bundle/Vundle.vim
 .DS_Store
+tmpfiles/

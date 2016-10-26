@@ -22,8 +22,8 @@ Plugin 'benmills/vimux'
 call vundle#end() " required by vundle
 filetype plugin indent on " required by vundle
 
-set backupdir=/tmp/
-set directory=/tmp/
+set backupdir=~/vimfiles/tmpfiles
+set directory=~/vimfiles/tmpfiles
 
 " size of a hard tabstop
 set tabstop=4
@@ -79,31 +79,19 @@ set incsearch
 map <Tab> :tabnext<CR>
 map <S-Tab> :tabpreviou<CR>
 
-" hack to get Solarized working
-"syntax on
-"set t_Co=256
-"let g:solarized_termcolors=256
-"syntax enable
-"set background=dark
-"colorscheme solarized
-
-"Gruvbox colorscheme
+"Colorscheme
 set t_Co=256
 let g:gruvbox_termcolors=256
 syntax enable
-colorscheme gruvbox
 set background=dark
-
-call togglebg#map("<F5>")
+colorscheme gruvbox
 
 " Show path/file name on the bottom of the window
 set ls=2
 
 " Enable folding
-"set foldmethod=syntax
+set foldmethod=manual
 set foldlevel=20
-
-"autocmd VimEnter,BufNewFile,BufReadPost *.html set ft=htmldjango
 
 " ctrl-p plugin
 let g:ctrlp_working_path_mode = 'ra'
@@ -132,30 +120,38 @@ set ttimeout ttimeoutlen=50
 " Python syntax
 let python_highlight_all = 1
 
-" ruby indent
+" Specific filetypes ident
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 
 " Mac
 set clipboard=unnamed
+
 " Mac backspace
 set backspace=indent,eol,start
 
-" set a map leader for more key combos
-let mapleader = ','
+" leader key
+let mapleader = ","
+
+" Leader Mappings
+nmap <leader>z :call VimuxRunCommand("make test")<cr>
+nmap <leader>r :call VimuxRunCommand("make run")<cr>
+nmap <leader>p :call VimuxRunCommand("make pep8")<cr>
 
 " close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=0
+
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
+
 " Toggle NERDTree
 nmap <silent> <leader>k :NERDTreeToggle<cr>
+
 " expand to the path of the file in the current buffer
 nmap <silent> <leader>y :NERDTreeFind<cr>
 
-" Vimux mappings
-autocmd Filetype python nmap <leader>z :call VimuxRunCommand("make test")<cr>
-autocmd Filetype python nmap <leader>p :call VimuxRunCommand("make pep8")<cr>
-autocmd Filetype python nmap <leader>r :call VimuxRunCommand("make run")<cr>
-
-" vim crypto algorithm
-set cm=blowfish
+" CtrlP ignore patterns
+let g:ctrlp_custom_ignore = {
+            \ 'dir': '\.git$\|node_modules$\|\.hg$\|\venv$|\venv$\',
+            \ 'file': '\.exe$\|\.so$'
+            \ }
+let g:ctrlp_show_hidden = 1
